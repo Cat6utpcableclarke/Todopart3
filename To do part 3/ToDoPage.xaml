@@ -13,23 +13,32 @@
                 FontAttributes="Bold"/>
 
             <BoxView HeightRequest="1" Color="Gray" Margin="0,10,0,10"/>
-
-            <CollectionView x:Name="ToDoList" ItemsSource="{Binding ToDoItems}">
-                <CollectionView.ItemTemplate>
+            <ListView x:Name="ToDos" HorizontalOptions="Fill" VerticalOptions="Fill">
+                <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Frame CornerRadius="10" Padding="10" Margin="0,5" BackgroundColor="{Binding BackgroundColor}">
-                            <Grid ColumnDefinitions="*,Auto,Auto,Auto" RowDefinitions="Auto">
-                                <Label Grid.Column="0" Text="{Binding TaskName}" VerticalOptions="Center" FontSize="Medium"/>
-                                <Button Grid.Column="1" Text="✏️" Command="{Binding EditCommand}" BackgroundColor="Transparent"/>
-                                <Button Grid.Column="2" Text="🗑️" Command="{Binding DeleteCommand}" BackgroundColor="Transparent"/>
-                                <Button Grid.Column="3" Text="✔️" Command="{Binding CompleteCommand}" BackgroundColor="Transparent"/>
-                            </Grid>
-                        </Frame>
+                        <ViewCell>
+                            <Frame BackgroundColor="Yellow" CornerRadius="5"  Padding="10" Margin="0,5" HasShadow="False" BorderColor="Transparent">
+                                <Grid HorizontalOptions="Fill" VerticalOptions="Fill" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Task}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black"/>
+                                    <Button Grid.Row="0" Grid.Column="1" Text="✏️" Clicked="Edit_Clicked"  HorizontalOptions="End" BackgroundColor="Transparent"/>
+                                    <Button Grid.Row="0" Grid.Column="2" Text="🗑️" Clicked="Delete_Clicked"  HorizontalOptions="End" BackgroundColor="Transparent"/>
+                                    <Button Grid.Row="0" Grid.Column="3" Text="✔️" Clicked="Done_Clicked"  CommandParameter="{Binding .}" HorizontalOptions="End" BackgroundColor="Transparent"/>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-            <Button Text="+" FontSize="Large" TextColor="Black" HorizontalOptions="Center" VerticalOptions="EndAndExpand" Command="{Binding AddCommand}" BackgroundColor="Transparent"/>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="+" Clicked="Add_Clicked" FontSize="Large" HorizontalOptions="Center" VerticalOptions="End" BackgroundColor="Transparent" TextColor="Black"/>
         </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>

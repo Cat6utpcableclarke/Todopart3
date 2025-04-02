@@ -1,13 +1,45 @@
 
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows.Input;
+
 namespace To_do_part_3;
 
 public partial class ToDoPage : ContentPage
 {
-	public ToDoPage()
+	private ObservableCollection<ToDo> toDoList = new ObservableCollection<ToDo>();
+
+    public ToDoPage()
 	{
 		InitializeComponent();
-	}
+        toDoList.Add(new ToDo (1,"Task1","task1", false));
+        toDoList.Add(new ToDo (2,"Task2","task2", false));
+        toDoList.Add(new ToDo (3,"Task3", "task3", false));
+        ToDos.ItemsSource = toDoList;
+    }
 
+	
 
+	private void Edit_Clicked(object sender, EventArgs e)
+    {
+        Debug.WriteLine("Edit Clicked");
+    }
 
+	private void Delete_Clicked(object sender, EventArgs e)
+    {
+        Debug.WriteLine("Delete Clicked");
+    }
+
+	private void Add_Clicked(object sender, EventArgs e)
+    {
+        Debug.WriteLine("Add Clicked");
+    }
+
+    private void Done_Clicked(object sender, EventArgs e)
+    {
+        Debug.WriteLine("Done Clicked");
+        var button = (Button)sender;
+        var toDo = (ToDo)button.CommandParameter;
+        Debug.WriteLine(toDo.Task);
+    }
 }
