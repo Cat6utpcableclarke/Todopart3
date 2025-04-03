@@ -65,13 +65,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AddToDoPage.xaml">
+	  <MauiXaml Update="Pages\AddToDoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="EditToDo.xaml">
+	  <MauiXaml Update="Pages\EditToDo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ToDoPage.xaml">
+	  <MauiXaml Update="Pages\ToDoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
