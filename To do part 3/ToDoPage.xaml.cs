@@ -22,6 +22,7 @@ public partial class ToDoPage : ContentPage
 
 	private void Edit_Clicked(object sender, EventArgs e)
     {
+        
         Debug.WriteLine("Edit Clicked");
     }
 
@@ -35,8 +36,10 @@ public partial class ToDoPage : ContentPage
         Debug.WriteLine("Add Clicked");
     }
 
-    private void Done_Clicked(object sender, EventArgs e)
+    private async void Done_Clicked(object sender, EventArgs e)
     {
+
+        await Navigation.PushModalAsync(new EditToDo(),true);
         Debug.WriteLine("Done Clicked");
         var button = (Button)sender;
         var toDo = (ToDo)button.CommandParameter;

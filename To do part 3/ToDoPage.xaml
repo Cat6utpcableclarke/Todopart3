@@ -13,12 +13,20 @@
                 FontAttributes="Bold"/>
 
             <BoxView HeightRequest="1" Color="Gray" Margin="0,10,0,10"/>
-            <ListView x:Name="ToDos" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <ListView x:Name="ToDos" HorizontalOptions="Fill" VerticalOptions="Fill" SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame BackgroundColor="Yellow" CornerRadius="5"  Padding="10" Margin="0,5" HasShadow="False" BorderColor="Transparent">
-                                <Grid HorizontalOptions="Fill" VerticalOptions="Fill" >
+                            <Grid RowSpacing="10" Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Frame  Grid.Row="0" BackgroundColor="Yellow" CornerRadius="20" Padding="10" Margin="10,5" HasShadow="False" HeightRequest="60">
+                                <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
@@ -29,11 +37,12 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="{Binding Task}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black"/>
-                                    <Button Grid.Row="0" Grid.Column="1" Text="✏️" Clicked="Edit_Clicked"  HorizontalOptions="End" BackgroundColor="Transparent"/>
-                                    <Button Grid.Row="0" Grid.Column="2" Text="🗑️" Clicked="Delete_Clicked"  HorizontalOptions="End" BackgroundColor="Transparent"/>
-                                    <Button Grid.Row="0" Grid.Column="3" Text="✔️" Clicked="Done_Clicked"  CommandParameter="{Binding .}" HorizontalOptions="End" BackgroundColor="Transparent"/>
+                                    <Button Grid.Row="0" Grid.Column="1" Text="✏️" Clicked="Edit_Clicked" HorizontalOptions="End" BackgroundColor="Transparent"/>
+                                    <Button Grid.Row="0" Grid.Column="2" Text="🗑️" Clicked="Delete_Clicked" HorizontalOptions="End" BackgroundColor="Transparent"/>
+                                    <Button Grid.Row="0" Grid.Column="3" Text="✔️" Clicked="Done_Clicked" CommandParameter="{Binding .}" HorizontalOptions="End" BackgroundColor="Transparent"/>
                                 </Grid>
                             </Frame>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
