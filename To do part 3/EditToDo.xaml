@@ -2,11 +2,40 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="To_do_part_3.EditToDo"
-             Title="EditToDo">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="Edit To Do Task">
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+
+        <HorizontalStackLayout VerticalOptions="Start">
+            <Button Text="←" BackgroundColor="Transparent" TextColor="Black" 
+                    />
+            <Label Text="Edit To Do Task"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   HorizontalOptions="CenterAndExpand"/>
+        </HorizontalStackLayout>
+
+        
+        <Frame BackgroundColor="#C3D44B" CornerRadius="15" Padding="10" HasShadow="True">
+            <VerticalStackLayout>
+                <Label Text="Buy iPhone"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                       TextColor="Black"/>
+                <Frame BackgroundColor="#A7B834" CornerRadius="10" Padding="10" Margin="0,5,0,0">
+                    <VerticalStackLayout>
+                        <Label Text="1. Buy Phone" FontSize="Small" FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                </Frame>
+                <Button Text="⌃⌃" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Action Buttons -->
+        <Button Text="Update" BackgroundColor="LightBlue" TextColor="Black"/>
+        <Button Text="Complete" BackgroundColor="LightBlue" TextColor="Black"/>
+        <Button Text="Delete" BackgroundColor="LightCoral" TextColor="Black"/>
+
     </VerticalStackLayout>
 </ContentPage>
