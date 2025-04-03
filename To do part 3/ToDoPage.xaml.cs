@@ -23,6 +23,7 @@ public partial class ToDoPage : ContentPage
 	private void Edit_Clicked(object sender, EventArgs e)
     {
         Debug.WriteLine("Edit Clicked");
+
     }
 
 	private void Delete_Clicked(object sender, EventArgs e)
@@ -30,10 +31,13 @@ public partial class ToDoPage : ContentPage
         Debug.WriteLine("Delete Clicked");
     }
 
-	private void Add_Clicked(object sender, EventArgs e)
+    private async void Add_Clicked(object sender, EventArgs e)
     {
         Debug.WriteLine("Add Clicked");
+        //await Shell.Current.GoToAsync("AddToDoPage");
+        await Navigation.PushModalAsync(new AddToDoPage(), true);
     }
+
 
     private void Done_Clicked(object sender, EventArgs e)
     {

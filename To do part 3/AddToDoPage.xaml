@@ -5,8 +5,54 @@
              Title="AddToDoPage">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Add Task"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center" 
+            FontSize="25"
+            Margin="0,20,0,10"
+            FontAttributes="Bold"/>
+        <BoxView
+           HeightRequest="2"
+           HorizontalOptions="FillAndExpand"
+           Margin="15,0,15,0"
+           Color="Black" />
+
+
+        <Border
+           HeightRequest="500"
+           StrokeShape="RoundRectangle 25"
+           BackgroundColor="#d7e1b4"
+           Margin="15,30,15,0" >
+
+            <VerticalStackLayout>
+                <Entry
+                    Placeholder="Task title"
+                    PlaceholderColor="Black"
+                    BackgroundColor="Transparent"
+                    FontSize="25"
+                    Margin="10,15,10,0"/>
+
+                <Editor
+                    Placeholder="Task Description"
+                    PlaceholderColor="Black"
+                    BackgroundColor="Transparent"
+                    FontSize="16"
+                    HeightRequest="400"
+                    Margin="10,15,10,0"/>
+
+
+            </VerticalStackLayout>
+
+        </Border>
+
+        <Button 
+            Text="+" 
+            FontSize="60" 
+            HorizontalOptions="Center" 
+            VerticalOptions="End" 
+            BackgroundColor="Transparent" 
+            TextColor="Black"/>
+
+
     </VerticalStackLayout>
 </ContentPage>

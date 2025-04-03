@@ -11,5 +11,8 @@
         Title="Home"
         ContentTemplate="{DataTemplate local:ToDoPage}"
         Route="MainPage" />
-
+    <ShellContent
+        Title="AddToDoPage"
+        ContentTemplate="{DataTemplate local:AddToDoPage}"
+        Route="AddToDoPage" />
 </Shell>
