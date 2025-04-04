@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="To_do_part_3.ProfilePage"
+             Title="ProfilePage">
+    <VerticalStackLayout>
+
+ 
+    <Label 
+        Grid.Column="1"
+        Text="Profile"
+        VerticalOptions="Center" 
+        HorizontalOptions="Center" 
+        FontSize="Large"
+        FontAttributes="Bold"
+        Margin="0,20,0,5"/>
+    
+        <BoxView HeightRequest="1" Color="Gray" Margin="25,10,25,10"/>
+
+        <Border
+            MaximumHeightRequest="260"
+            MaximumWidthRequest="260"
+            StrokeShape="RoundRectangle 25"
+            Stroke="Black"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="0,25,0,0">
+            <Image
+                Source="profile_pic.jpg"/>
+        </Border>
+        <VerticalStackLayout
+            Margin="0,25,0,0">
+            <Label
+                Text="Clarke Steven Cañal"
+                FontSize="25"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
+            <Label
+                Text="My name is Clarke Steven Cañal and I am a master at programming and networking."
+                Margin="50,10,50,0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                
+                FontSize="15"/>
+        </VerticalStackLayout>
+            <Button Text="Sign Out" BackgroundColor="LightCoral" TextColor="Black" Margin="30,30,30,10"/>
+            <Button Text="Edit Account" BackgroundColor="LightBlue" TextColor="Black" Margin="30,0,30,10" Clicked="EditProfile"/>
+    </VerticalStackLayout>
+</ContentPage>

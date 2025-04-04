@@ -12,6 +12,7 @@ public partial class ToDoPage : ContentPage
     public ToDoPage()
 	{
 		InitializeComponent();
+        Shell.SetNavBarIsVisible(this, false);
         toDoList.Add(new ToDo (1,"Task1","task1", false));
         toDoList.Add(new ToDo (2,"Task2","task2", false));
         toDoList.Add(new ToDo (3,"Task3", "task3", false));
@@ -35,14 +36,12 @@ public partial class ToDoPage : ContentPage
     private async void Add_Clicked(object sender, EventArgs e)
     {
         Debug.WriteLine("Add Clicked");
-        //await Shell.Current.GoToAsync("AddToDoPage");
+        //await Shell.Current.GoToAsync("///AddToDo");
         await Navigation.PushModalAsync(new AddToDoPage(), true);
     }
 
-    private async void Done_Clicked(object sender, EventArgs e)
+    private void Done_Clicked(object sender, EventArgs e)
     {
-
-       await Navigation.PushModalAsync(new CompletedToDo(), true);
         Debug.WriteLine("Done Clicked");
         var button = (Button)sender;
         var toDo = (ToDo)button.CommandParameter;

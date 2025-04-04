@@ -5,7 +5,6 @@
         public AppShell()
         {
             InitializeComponent();
-            //NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

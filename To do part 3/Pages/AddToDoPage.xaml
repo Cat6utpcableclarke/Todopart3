@@ -4,55 +4,72 @@
              x:Class="To_do_part_3.AddToDoPage"
              Title="AddToDoPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Add Task"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" 
-            FontSize="25"
-            Margin="0,20,0,10"
-            FontAttributes="Bold"/>
-        <BoxView
-           HeightRequest="2"
-           HorizontalOptions="FillAndExpand"
-           Margin="15,0,15,0"
-           Color="Black" />
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ImageButton 
+                Grid.Column="0"
+                Source="back_button_icon.png"
+                Clicked="OnClickReturn"
+                MaximumWidthRequest="20"
+                MaximumHeightRequest="20"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                BackgroundColor="Transparent"
+                Margin="0,20,50,5"
+                />
+            <Label 
+                Grid.Column="1"
+                Text="Add Task"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                FontSize="Large"
+                FontAttributes="Bold"
+                Margin="0,20,0,5"/>
+        </Grid>
 
 
-        <Border
-           HeightRequest="500"
-           StrokeShape="RoundRectangle 25"
-           BackgroundColor="#d7e1b4"
-           Margin="15,30,15,0" >
+        
+        <BoxView HeightRequest="1" Color="Gray" Margin="25,10,25,10"/>
 
-            <VerticalStackLayout>
-                <Entry
-                    Placeholder="Task title"
-                    PlaceholderColor="Black"
-                    BackgroundColor="Transparent"
-                    FontSize="25"
-                    Margin="10,15,10,0"/>
+        <VerticalStackLayout Margin="20,10,20,0" Spacing="15">
+            <Border
+            BackgroundColor="#C3D44B" 
+            StrokeShape="RoundRectangle 15"
+            Padding="10" 
+            >
+                <VerticalStackLayout>
+                    <Entry Placeholder="Task title"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                       PlaceholderColor="Black"/>
+                    <Border
+                    BackgroundColor="#A7B834" 
+                    StrokeShape="RoundRectangle 10"
+                    Padding="10" 
+                    Margin="0,5,0,0"  
+                    HeightRequest="400">
+                        <VerticalStackLayout>
+                            <Editor 
+                            Placeholder="Add Description" 
+                            FontSize="Small"
+                            PlaceholderColor="Black"
+                            FontAttributes="Bold" 
+                            HeightRequest="400"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
 
-                <Editor
-                    Placeholder="Task Description"
-                    PlaceholderColor="Black"
-                    BackgroundColor="Transparent"
-                    FontSize="16"
-                    HeightRequest="400"
-                    Margin="10,15,10,0"/>
-
-
-            </VerticalStackLayout>
-
-        </Border>
-
-        <Button 
-            Text="+" 
-            FontSize="60" 
-            HorizontalOptions="Center" 
-            VerticalOptions="End" 
-            BackgroundColor="Transparent" 
-            TextColor="Black"/>
-
+        <Button Text="+" FontSize="50" HorizontalOptions="Center" VerticalOptions="End" BackgroundColor="Transparent" TextColor="Black"/>
 
     </VerticalStackLayout>
 </ContentPage>
