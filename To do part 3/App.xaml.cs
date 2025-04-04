@@ -10,7 +10,7 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new ToDoPage());
+            return new Window(new AppShell());
         }
     }
 }

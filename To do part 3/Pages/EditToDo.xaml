@@ -3,39 +3,72 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="To_do_part_3.EditToDo"
              Title="Edit To Do Task">
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ImageButton 
+                Grid.Column="0"
+                Source="back_button_icon.png"
+                Clicked="OnClickReturn"
+                MaximumWidthRequest="20"
+                MaximumHeightRequest="20"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                BackgroundColor="Transparent"
+                Margin="0,20,50,5"
+                />
+            <Label 
+                Grid.Column="1"
+                Text="Add Task"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                FontSize="Large"
+                FontAttributes="Bold"
+                Margin="0,20,0,5"/>
+        </Grid>
 
+        <BoxView HeightRequest="1" Color="Gray" Margin="25,10,25,10"/>
 
-        <HorizontalStackLayout VerticalOptions="Start">
-            <Button Text="←" BackgroundColor="Transparent" TextColor="Black" 
-                    />
-            <Label Text="Edit To Do Task"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   VerticalOptions="Center"
-                   HorizontalOptions="CenterAndExpand"/>
-        </HorizontalStackLayout>
+        <VerticalStackLayout Margin="20,10,20,0" Spacing="15">
 
-        
-        <Frame BackgroundColor="#C3D44B" CornerRadius="15" Padding="10" HasShadow="True" >
-            <VerticalStackLayout>
-                <Entry Text="Buy iPhone"
-                       FontSize="Medium"
-                       FontAttributes="Bold"
-                       TextColor="Black"/>
-                <Frame BackgroundColor="#A7B834" CornerRadius="10" Padding="10" Margin="0,5,0,0"  HeightRequest="300">
-                    <VerticalStackLayout>
-                        <Editor Text="1. Buy Phone" FontSize="Small" FontAttributes="Bold" HeightRequest="300"/>
-                    </VerticalStackLayout>
-                </Frame>
-                <Button Text="⌃⌃" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="Center"/>
-            </VerticalStackLayout>
-        </Frame>
+            <Border
+                BackgroundColor="#C3D44B" 
+                StrokeShape="RoundRectangle 15"
+                Padding="10" 
+                >
+            
+                <VerticalStackLayout>
+                    <Entry Text="Buy iPhone"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
+                    <Border 
+                        BackgroundColor="#A7B834" 
+                        StrokeShape="RoundRectangle 10"
+                        Padding="10" 
+                        Margin="0,5,0,0"  
+                        HeightRequest="300">
+                        <VerticalStackLayout>
+                            <Editor Text="1. Buy Phone" FontSize="Small" FontAttributes="Bold" HeightRequest="300"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+                
+                
+            </Border>
 
-        <!-- Action Buttons -->
-        <Button Text="Update" BackgroundColor="LightBlue" TextColor="Black"/>
-        <Button Text="Complete" BackgroundColor="LightBlue" TextColor="Black"/>
-        <Button Text="Delete" BackgroundColor="LightCoral" TextColor="Black"/>
+            <!-- Action Buttons -->
+            <Button Text="Update" BackgroundColor="LightBlue" TextColor="Black"/>
+            <Button Text="Complete" BackgroundColor="LightBlue" TextColor="Black"/>
+            <Button Text="Delete" BackgroundColor="LightCoral" TextColor="Black"/>
 
+        </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

@@ -2,17 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="To_do_part_3.ToDoPage"
-             Title="To Do">
+             Title="ToDo">
     <ContentPage.Content>
-        <VerticalStackLayout Padding="10">
+        <VerticalStackLayout>
             <Label 
-                Text="To Do"
+                Text="To Dos"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" 
                 FontSize="Large"
-                FontAttributes="Bold"/>
+                FontAttributes="Bold"
+                Margin="0,20,0,5"/>
 
-            <BoxView HeightRequest="1" Color="Gray" Margin="0,10,0,10"/>
+            <BoxView HeightRequest="1" Color="Gray" Margin="25,10,25,10"/>
             <ListView x:Name="ToDos" HorizontalOptions="Fill" VerticalOptions="Fill" SeparatorVisibility="None" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
