@@ -7,4 +7,10 @@ public partial class ProfilePage : ContentPage
 		InitializeComponent();
 		Shell.SetNavBarIsVisible(this, false);
     }
+
+	private async void EditProfile(object sender, EventArgs e)
+	{
+		await Navigation.PushModalAsync(new EditProfile(), true);
+	}
+
 }
