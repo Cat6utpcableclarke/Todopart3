@@ -17,15 +17,15 @@
         </HorizontalStackLayout>
 
         
-        <Frame BackgroundColor="#C3D44B" CornerRadius="15" Padding="10" HasShadow="True">
+        <Frame BackgroundColor="#C3D44B" CornerRadius="15" Padding="10" HasShadow="True" >
             <VerticalStackLayout>
-                <Label Text="Buy iPhone"
+                <Entry Text="Buy iPhone"
                        FontSize="Medium"
                        FontAttributes="Bold"
                        TextColor="Black"/>
-                <Frame BackgroundColor="#A7B834" CornerRadius="10" Padding="10" Margin="0,5,0,0">
+                <Frame BackgroundColor="#A7B834" CornerRadius="10" Padding="10" Margin="0,5,0,0"  HeightRequest="300">
                     <VerticalStackLayout>
-                        <Label Text="1. Buy Phone" FontSize="Small" FontAttributes="Bold"/>
+                        <Editor Text="1. Buy Phone" FontSize="Small" FontAttributes="Bold" HeightRequest="300"/>
                     </VerticalStackLayout>
                 </Frame>
                 <Button Text="⌃⌃" BackgroundColor="Transparent" TextColor="Black" HorizontalOptions="Center"/>

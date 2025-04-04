@@ -16,4 +16,15 @@
     ContentTemplate="{DataTemplate local:EditToDo}"
     Route="EditToDo" />
 
+    <ShellContent
+        Title="CompletedToDo"
+        ContentTemplate="{DataTemplate local:CompletedToDo}"
+        Route="CompletedToDo" />
+
+    <ShellContent
+        Title="AddToDo"
+        ContentTemplate="{DataTemplate local:AddToDoPage}"
+        Route="AddToDo" />
+
+
 </Shell>
