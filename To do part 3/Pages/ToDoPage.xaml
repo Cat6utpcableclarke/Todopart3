@@ -25,7 +25,7 @@
                                     <ColumnDefinition Width="*"  />
                                 </Grid.ColumnDefinitions>
 
-                                <Frame  Grid.Row="0"  Grid.Column="0" BackgroundColor="Yellow" CornerRadius="40" Padding="15" Margin="5" HasShadow="False" HeightRequest="80">
+                                <Border  Grid.Row="0"  Grid.Column="0" BackgroundColor="Yellow"  Padding="15" Margin="5"  HeightRequest="80">
                                     <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
@@ -41,7 +41,7 @@
                                         <Button Grid.Row="0" Grid.Column="2" Text="🗑️" Clicked="Delete_Clicked" HorizontalOptions="End" BackgroundColor="Transparent"/>
                                         <Button Grid.Row="0" Grid.Column="3" Text="✔️" Clicked="Done_Clicked" CommandParameter="{Binding .}" HorizontalOptions="End" BackgroundColor="Transparent"/>
                                     </Grid>
-                                </Frame>
+                                </Border>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
-using To_do_part_3.Models;
 
 namespace To_do_part_3;
 
