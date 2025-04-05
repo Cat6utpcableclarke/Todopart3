@@ -26,7 +26,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Frame  Grid.Row="0" BackgroundColor="Yellow" CornerRadius="25" Padding="10" Margin="10" HasShadow="False" HeightRequest="70">
+                            <Border  Grid.Row="0" BackgroundColor="Yellow"  Padding="10" Margin="10"  HeightRequest="70">
                                 <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -36,9 +36,9 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="{Binding Task}" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black"/>
-                                    <Button Grid.Row="0" Grid.Column="1" Text="🗑" Clicked="Delete_Clicked" HorizontalOptions="End" BackgroundColor="Transparent" FontSize="Large"/>
+                                    <Button Grid.Row="0" Grid.Column="1" Text="🗑" Clicked="Delete_Clicked" HorizontalOptions="Center" BackgroundColor="Transparent" FontSize="Large"/>
                                 </Grid>
-                            </Frame>
+                            </Border>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
