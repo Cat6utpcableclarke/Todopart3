@@ -14,14 +14,13 @@ public partial class SignIn : ContentPage
 	public async void SignInClicked(object sender, EventArgs e) {
 
 		Debug.WriteLine("CLicked");
-
         await Shell.Current.GoToAsync("//ToDoPage");
     }
 
 
 	public async void SignUpClicked(object sender, EventArgs e) {
 		Debug.WriteLine("Clicked");
-		await Shell.Current.GoToAsync("//SignUp");
-	
+		//await Shell.Current.GoToAsync("//SignUp");
+		await Navigation.PushAsync(new SignUp());
 	}
 }

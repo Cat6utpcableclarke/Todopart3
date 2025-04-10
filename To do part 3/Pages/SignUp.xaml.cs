@@ -16,12 +16,12 @@ public partial class SignUp : ContentPage
         Debug.WriteLine("Sign Up Clicked");
         await Shell.Current.GoToAsync("//ToDoPage");
 
-
     }
 
     private async void SignInButtonClicked(object sender, EventArgs e)
     {
         Debug.WriteLine("Sign In Clicked");
-        await Shell.Current.GoToAsync("//SignIn");
+        //await Shell.Current.GoToAsync("//SignIn");
+        await Navigation.PopAsync();
     }
 }

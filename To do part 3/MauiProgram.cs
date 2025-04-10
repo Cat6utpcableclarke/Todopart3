@@ -21,6 +21,7 @@ public static class MauiProgram
                 // Remove Editor underline for all platforms
 #if ANDROID || IOS
                 handlers.AddHandler(typeof(Editor), typeof(NoUnderlineEditorHandler));
+                handlers.AddHandler(typeof(Entry), typeof(NoUnderlineEntryHandler));
 #endif
             });
 
