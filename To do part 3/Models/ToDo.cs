@@ -1,53 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace To_do_part_3;
 
-public class ToDo
+public class ToDo : INotifyPropertyChanged
 {
-    private int _id;
-    private string _task;
-    private string _description;
-    private bool _isDone;
+    private int _itemId;
+    private string _itemName;
+    private string _itemDescription;
+    private string _status;
+    private int _userId;
+    private DateTime _timeModified;
 
-    public int Id
+    public int ItemId
     {
-        get => _id;
-        set => _id = value;
-    }
-    public string Task
-    {
-        get => _task;
-        set => _task = value;
+        get { return _itemId; }
+        set { _itemId = value; OnPropertyChanged(nameof(ItemId)); }
     }
 
-    public string Description
+    public string ItemName
     {
-        get => _description;
-        set => _description = value;
+        get { return _itemName; }
+        set { _itemName = value; OnPropertyChanged(nameof(ItemName)); }
     }
 
-    public bool IsDone
+    public string ItemDescription
     {
-        get => _isDone;
-        set => _isDone = value;
+        get { return _itemDescription; }
+        set { _itemDescription = value; OnPropertyChanged(nameof(ItemDescription)); }
     }
 
-    public ToDo()
+    public string Status
     {
-        _task = "";
-        _description = "";
-        _isDone = false;
+        get { return _status; }
+        set { _status = value; OnPropertyChanged(nameof(Status)); }
     }
 
-    public ToDo(int id,string task, string description, bool isDone)
-    {   
-        _id = id;
-        _task = task;
-        _description = description;
-        _isDone = isDone;
+    public int UserId
+    {
+        get { return _userId; }
+        set { _userId = value; OnPropertyChanged(nameof(UserId)); }
+    }
+
+    public DateTime TimeModified
+    {
+        get { return _timeModified; }
+        set { _timeModified = value; OnPropertyChanged(nameof(TimeModified)); }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

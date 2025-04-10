@@ -13,10 +13,10 @@ public partial class ToDoPage : ContentPage
 	{
 		InitializeComponent();
         Shell.SetNavBarIsVisible(this, false);
-        toDoList.Add(new ToDo (1,"Task1","task1", false));
-        toDoList.Add(new ToDo (2,"Task2","task2", false));
-        toDoList.Add(new ToDo (3,"Task3", "task3", false));
-        ToDos.ItemsSource = toDoList;
+        //toDoList.Add(new ToDo (1,"Task1","task1", false));
+        //toDoList.Add(new ToDo (2,"Task2","task2", false));
+        //toDoList.Add(new ToDo (3,"Task3", "task3", false));
+        //ToDos.ItemsSource = toDoList;
     }
 
 	
@@ -45,6 +45,6 @@ public partial class ToDoPage : ContentPage
         Debug.WriteLine("Done Clicked");
         var button = (Button)sender;
         var toDo = (ToDo)button.CommandParameter;
-        Debug.WriteLine(toDo.Task);
+        //Debug.WriteLine(toDo.Task);
     }
 }

@@ -10,23 +10,24 @@
             HorizontalOptions="Center" 
             FontSize="Large"
             FontAttributes="Bold"
-            Margin="0,20,0,5"/> 
-
+            Margin="0,20,0,5"/>
 
         <BoxView HeightRequest="1" Color="Gray" Margin="25,10,25,10"/>
         <ListView x:Name="CToDos" HorizontalOptions="Fill" VerticalOptions="Fill" SeparatorVisibility="None" >
             <ListView.ItemTemplate>
-                <DataTemplate >
-                    <ViewCell >
+                <DataTemplate>
+                    <ViewCell>
                         <Grid RowSpacing="10" Margin="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <Border  Grid.Row="0" BackgroundColor="Yellow"  Padding="10" Margin="10"  HeightRequest="70">
+                            <Border Grid.Row="0" BackgroundColor="Yellow" Padding="10" Margin="10" HeightRequest="70">
                                 <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -34,9 +35,11 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Task}" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black"/>
-                                    <Button Grid.Row="0" Grid.Column="1" Text="🗑" Clicked="Delete_Clicked" HorizontalOptions="Center" BackgroundColor="Transparent" FontSize="Large"/>
+                                    <Label Grid.Row="0" Text="{Binding Task, TargetNullValue='No Task'}" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black"/>
+                                    <Button Grid.Row="0" Grid.Column="1" Text="✏️" Clicked="Edit_Clicked" HorizontalOptions="Center" BackgroundColor="Transparent" FontSize="Large"/>
+                                    <Button Grid.Row="0" Grid.Column="2" Text="🗑️" Clicked="Delete_Clicked" HorizontalOptions="Center" BackgroundColor="Transparent" FontSize="Large"/>
                                 </Grid>
                             </Border>
                         </Grid>

@@ -14,6 +14,7 @@
 
         <Entry 
             Placeholder="Email Address"
+            x:Name="Email"
             BackgroundColor="White"
             TextColor="Black"
             HeightRequest="50"
@@ -23,6 +24,7 @@
 
         <Entry 
             Placeholder="Password"
+            x:Name="Password"
             BackgroundColor="White"
             TextColor="Black"
             HeightRequest="50"
