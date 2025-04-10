@@ -58,6 +58,6 @@ public partial class SignIn : ContentPage
     public async void SignUpClicked(object sender, EventArgs e)
     {
         Debug.WriteLine("Sign Up Clicked");
-        await Shell.Current.GoToAsync("//SignUp");
+        await Navigation.PushAsync(new SignUp());
     }
 }

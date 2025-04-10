@@ -6,6 +6,9 @@ public partial class EditCompleted : ContentPage
 	{
 		InitializeComponent();
 	}
-
+    private async void OnClickReturn(object sender, EventArgs e)
+    {
+        await Navigation.PopModalAsync();
+    }
 
 }

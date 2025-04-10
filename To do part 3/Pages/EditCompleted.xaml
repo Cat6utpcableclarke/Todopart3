@@ -18,6 +18,7 @@
                 <ImageButton 
                  Grid.Column="0"
                  Source="back_button_icon.png"
+                 Clicked="OnClickReturn"
                  MaximumWidthRequest="20"
                  MaximumHeightRequest="40"
                  VerticalOptions="Center"

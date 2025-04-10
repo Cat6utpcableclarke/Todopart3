@@ -3,35 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="To_do_part_3.SignIn"
              Title="SignIn">
-    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="CenterAndExpand">
+    <VerticalStackLayout Padding="30" Spacing="20">
         <Image
             Source="logo.png"
             WidthRequest="180"
             HeightRequest="180"
             HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="0,0,0,20"/>
+            Margin="0,110,0,20"/>
 
-        <Entry 
-            Placeholder="Email Address"
-            x:Name="Email"
-            BackgroundColor="White"
-            TextColor="Black"
-            HeightRequest="50"
-            Margin="0,0,0,10"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="Center"/>
+        <Border Margin="0,0,0,5" Padding="3" StrokeShape="RoundRectangle 15" StrokeThickness="1" BackgroundColor="LightGray">
+            <Entry Placeholder="Email Address" PlaceholderColor="Gray" x:Name="Email" />
+        </Border>
 
-        <Entry 
-            Placeholder="Password"
-            x:Name="Password"
-            BackgroundColor="White"
-            TextColor="Black"
-            HeightRequest="50"
-            Margin="0,0,0,20"
-            IsPassword="True"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="Center"/>
+        <Border Margin="0,0,0,5" Padding="3" StrokeShape="RoundRectangle 15" StrokeThickness="1" BackgroundColor="LightGray">
+            <Entry Placeholder="Password" IsPassword="True" PlaceholderColor="Gray" x:Name="Password" />
+        </Border>
 
         <Button 
             Text="SIGN UP"

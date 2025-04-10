@@ -66,6 +66,7 @@ public partial class SignUp : ContentPage
     private async void SignInButtonClicked(object sender, EventArgs e)
     {
         Debug.WriteLine("Sign In Clicked");
-        await Shell.Current.GoToAsync("//SignIn");
+        //await Shell.Current.GoToAsync("//SignIn");
+        await Navigation.PopAsync();
     }
 }
