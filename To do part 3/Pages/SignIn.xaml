@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="To_do_part_3.SignIn"
+             Title="SignIn">
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="CenterAndExpand">
+        <Image
+            Source="logo.png"
+            WidthRequest="180"
+            HeightRequest="180"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Margin="0,0,0,20"/>
+
+        <Entry 
+            Placeholder="Email Address"
+            BackgroundColor="White"
+            TextColor="Black"
+            HeightRequest="50"
+            Margin="0,0,0,10"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Center"/>
+
+        <Entry 
+            Placeholder="Password"
+            BackgroundColor="White"
+            TextColor="Black"
+            HeightRequest="50"
+            Margin="0,0,0,20"
+            IsPassword="True"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Center"/>
+
+        <Button 
+            Text="SIGN UP"
+            BackgroundColor="#8A2BE2"
+            TextColor="White"
+            HeightRequest="50"
+            CornerRadius="25"
+            Clicked="SignUpClicked"
+            Margin="0,0,0,10"/>
+
+        <Button 
+            Text="SIGN IN"
+            BackgroundColor="#9370DB"
+            TextColor="White"
+            HeightRequest="50"
+            CornerRadius="25"
+            Clicked="SignInClicked"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Center"/>
+    </VerticalStackLayout>
+</ContentPage>

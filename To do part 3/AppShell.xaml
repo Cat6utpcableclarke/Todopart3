@@ -6,22 +6,22 @@
     Shell.FlyoutBehavior="Disabled"
     Title="To_do_part_3">
 
-    <TabBar  x:Name="MainTabBar">
+    <TabBar x:Name="MainTabBar">
         <Tab Title="ToDo" Icon="todo_icon_dark.png">
             <ShellContent 
-                Route="ToDoPage" 
-                ContentTemplate="{DataTemplate local:ToDoPage}" />
+            Route="ToDoPage" 
+            ContentTemplate="{DataTemplate local:ToDoPage}" />
         </Tab>
 
         <Tab Title="Completed" Icon="completed_icon_dark.png">
             <ShellContent 
-                Route="CompletedToDo" 
-                ContentTemplate="{DataTemplate local:CompletedToDo}" />
+            Route="CompletedToDo" 
+            ContentTemplate="{DataTemplate local:CompletedToDo}" />
         </Tab>
         <Tab Title="Profile" Icon="profile_icon_dark.png">
             <ShellContent 
-                Route="Profile" 
-                ContentTemplate="{DataTemplate local:ProfilePage}" />
+            Route="Profile" 
+            ContentTemplate="{DataTemplate local:ProfilePage}" />
         </Tab>
     </TabBar>
 
@@ -43,6 +43,20 @@
         ContentTemplate="{DataTemplate local:EditProfile}"
         Route="EditProfile"
     />
+
+    <ShellContent
+        Title="SignIn"
+        ContentTemplate="{DataTemplate local:SignIn}"
+        Route="SignIn" />
+
+    <ShellContent
+        Title="SignUp"
+        ContentTemplate="{DataTemplate local:SignUp}"
+        Route="SignUp" />
+
+   
+    
+    
 
 
 </Shell>

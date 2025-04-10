@@ -17,8 +17,10 @@ public partial class CompletedToDo : ContentPage
     }
 
 
-    private void Delete_Clicked(object sender, EventArgs e)
+    private async void Delete_Clicked(object sender, EventArgs e)
     {
         Debug.WriteLine("Delete Clicked");
+
+        await Navigation.PushModalAsync(new EditCompleted(), true);
     }
 }
