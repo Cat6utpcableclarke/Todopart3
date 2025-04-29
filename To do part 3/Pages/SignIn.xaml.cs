@@ -50,6 +50,11 @@ public partial class SignIn : ContentPage
                 {
                     Debug.WriteLine("Sign In Successful");
                     await DisplayAlert("Success", responseJson["message"].GetString(), "OK");
+
+                    var data = JsonSerializer.Deserialize<Dictionary<string, object>>(responseJson["data"].ToString());
+                    var userId = data["id"].ToString();
+                    await SecureStorage.SetAsync("user_id", userId);
+                    await DisplayAlert("Success", responseJson["message"].ToString(), "OK");
                     await Shell.Current.GoToAsync("//ToDoPage");
                 }
                 else if (status == 400)
@@ -62,17 +67,6 @@ public partial class SignIn : ContentPage
                     Debug.WriteLine("Unexpected Status Code");
                     await DisplayAlert("Error", "An unexpected error occurred. Please try again.", "OK");
                 }
-            }
-                Debug.WriteLine("Sign In Successful");
-                Debug.WriteLine($"sulod sa signin: {responseContent}");
-                var data = JsonSerializer.Deserialize<Dictionary<string, object>>(responseJson["data"].ToString());
-                var userId = data["id"].ToString();
-
-                // Store the user ID in Secure Storage
-                await SecureStorage.SetAsync("user_id", userId);
-
-                await DisplayAlert("Success", responseJson["message"].ToString(), "OK");
-                await Shell.Current.GoToAsync("//ToDoPage");
             }
             else
             {
