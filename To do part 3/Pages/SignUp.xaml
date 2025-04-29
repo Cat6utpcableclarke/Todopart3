@@ -13,7 +13,11 @@
             Margin="0,70,0,20" />
 
         <Border Margin="0,20,0,5" Padding="3" StrokeShape="RoundRectangle 15" StrokeThickness="1" BackgroundColor="LightGray">
-            <Entry  x:Name="UserName" Placeholder="Username" PlaceholderColor="Gray" />
+            <Entry  x:Name="FirstName" Placeholder="FirstName" PlaceholderColor="Gray" />
+        </Border>
+
+        <Border Margin="0,0,0,5" Padding="3" StrokeShape="RoundRectangle 15" StrokeThickness="1" BackgroundColor="LightGray">
+            <Entry  x:Name="LastName" Placeholder="LastName" PlaceholderColor="Gray" />
         </Border>
 
         <Border Margin="0,0,0,5" Padding="3" StrokeShape="RoundRectangle 15" StrokeThickness="1" BackgroundColor="LightGray">
@@ -25,7 +29,7 @@
         </Border>
 
         <Border Margin="0,0,0,10" Padding="3" StrokeShape="RoundRectangle 15" StrokeThickness="1" BackgroundColor="LightGray">
-            <Entry x:Name="ConfirmPasswword" Placeholder="Confirm Password" IsPassword="True" PlaceholderColor="Gray" />
+            <Entry x:Name="ConfirmPassword" Placeholder="Confirm Password" IsPassword="True" PlaceholderColor="Gray" />
         </Border>
 
         <Button 
