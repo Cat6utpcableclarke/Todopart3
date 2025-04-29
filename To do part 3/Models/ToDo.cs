@@ -7,11 +7,21 @@ namespace To_do_part_3;
 public class ToDo : INotifyPropertyChanged
 {
     private int _itemId;
-    private string _itemName;
-    private string _itemDescription;
-    private string _status;
+    private string _itemName = string.Empty; // Initialize to avoid nullability warnings
+    private string _itemDescription = string.Empty; // Initialize to avoid nullability warnings
+    private string _status = string.Empty; // Initialize to avoid nullability warnings
     private int _userId;
     private DateTime _timeModified;
+
+    public ToDo(int itemId, string itemName, string itemDescription, string status, int userId, DateTime timeModified)
+    {
+        ItemId = itemId;
+        ItemName = itemName;
+        ItemDescription = itemDescription;
+        Status = status;
+        UserId = userId;
+        TimeModified = timeModified;
+    }
 
     public int ItemId
     {
@@ -49,7 +59,7 @@ public class ToDo : INotifyPropertyChanged
         set { _timeModified = value; OnPropertyChanged(nameof(TimeModified)); }
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged; // Mark as nullable to avoid nullability warnings
 
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
