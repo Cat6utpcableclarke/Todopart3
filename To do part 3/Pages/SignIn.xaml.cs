@@ -17,7 +17,6 @@ public partial class SignIn : ContentPage
     {
         Debug.WriteLine("Sign In Clicked");
 
-        // Replace these with actual user input values from the UI
         var email = Email.Text; // Assuming EmailEntry is the Entry for email
         var password = Password.Text; // Assuming PasswordEntry is the Entry for password
 
@@ -32,20 +31,42 @@ public partial class SignIn : ContentPage
         try
         {
             var response = await _httpClient.GetAsync(url);
+            Debug.WriteLine($"HTTP Status Code: {response.StatusCode}");
 
             var responseContent = await response.Content.ReadAsStringAsync();
-            var responseJson = JsonSerializer.Deserialize<Dictionary<string, object>>(responseContent);
 
-            if (response.IsSuccessStatusCode)
+            // Deserialize into Dictionary<string, JsonElement>
+            var responseJson = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(responseContent);
+
+            Debug.WriteLine("Response JSON:");
+            Debug.WriteLine(JsonSerializer.Serialize(responseJson, new JsonSerializerOptions { WriteIndented = true }));
+
+            if (responseJson != null && responseJson.ContainsKey("status"))
             {
-                Debug.WriteLine("Sign In Successful");
-                await DisplayAlert("Success", responseJson["message"].ToString(), "OK");
-                await Shell.Current.GoToAsync("//ToDoPage");
+                // Use GetInt32() to extract the status
+                var status = responseJson["status"].GetInt32();
+
+                if (status == 200)
+                {
+                    Debug.WriteLine("Sign In Successful");
+                    await DisplayAlert("Success", responseJson["message"].GetString(), "OK");
+                    await Shell.Current.GoToAsync("//ToDoPage");
+                }
+                else if (status == 400)
+                {
+                    Debug.WriteLine("Sign In Failed: Email or password is incorrect.");
+                    await DisplayAlert("Error", responseJson["message"].GetString(), "OK");
+                }
+                else
+                {
+                    Debug.WriteLine("Unexpected Status Code");
+                    await DisplayAlert("Error", "An unexpected error occurred. Please try again.", "OK");
+                }
             }
             else
             {
-                Debug.WriteLine($"Sign In Failed: {response.StatusCode}");
-                await DisplayAlert("Error", responseJson["message"].ToString(), "OK");
+                Debug.WriteLine("Unexpected Response Format");
+                await DisplayAlert("Error", "An unexpected error occurred. Please try again.", "OK");
             }
         }
         catch (Exception ex)
@@ -54,6 +75,7 @@ public partial class SignIn : ContentPage
             await DisplayAlert("Error", "An error occurred. Please try again.", "OK");
         }
     }
+
 
     public async void SignUpClicked(object sender, EventArgs e)
     {

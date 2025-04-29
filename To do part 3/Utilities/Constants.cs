@@ -13,10 +13,10 @@ public class Constants
     }
 
     public static readonly
-        string URL = "https://todo-list.dcism.org/";
+        string URL = "https://todo-list.dcism.org";
 
 
-    public static readonly string SIGNUP = "/signup action.php";
-    public static readonly string SIGNIN = "/signin action.php";
+    public static readonly string SIGNUP = "/signup_action.php";
+    public static readonly string SIGNIN = "/signin_action.php";
     public static readonly string POSTS = "/posts";
 }
