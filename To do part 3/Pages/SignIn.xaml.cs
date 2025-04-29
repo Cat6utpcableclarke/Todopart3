@@ -50,6 +50,11 @@ public partial class SignIn : ContentPage
                 {
                     Debug.WriteLine("Sign In Successful");
                     await DisplayAlert("Success", responseJson["message"].GetString(), "OK");
+
+                    var data = JsonSerializer.Deserialize<Dictionary<string, object>>(responseJson["data"].ToString());
+                    var userId = data["id"].ToString();
+                    await SecureStorage.SetAsync("user_id", userId);
+                    await DisplayAlert("Success", responseJson["message"].ToString(), "OK");
                     await Shell.Current.GoToAsync("//ToDoPage");
                 }
                 else if (status == 400)

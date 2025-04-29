@@ -46,30 +46,34 @@
             Padding="10" 
             >
                 <VerticalStackLayout>
-                    <Entry Placeholder="Task title"
-                       FontSize="Medium"
-                       FontAttributes="Bold"
-                       PlaceholderColor="Black"/>
-                    <Border
-                    BackgroundColor="#A7B834" 
-                    StrokeShape="RoundRectangle 10"
-                    Padding="10" 
-                    Margin="0,5,0,0"  
-                    HeightRequest="400">
-                        <VerticalStackLayout>
-                            <Editor 
-                            Placeholder="Add Description" 
-                            FontSize="Small"
-                            PlaceholderColor="Black"
-                            FontAttributes="Bold" 
-                            HeightRequest="400"/>
-                        </VerticalStackLayout>
-                    </Border>
-                </VerticalStackLayout>
+                                   <!-- Holds the title of the task -->
+                                   <Entry Placeholder="Task title"
+                                      FontSize="Medium"
+                                      FontAttributes="Bold"
+                                      PlaceholderColor="Black"
+                                      x:Name="Task_title"/>
+                                   <Border
+                                   BackgroundColor="#A7B834" 
+                                   StrokeShape="RoundRectangle 10"
+                                   Padding="10" 
+                                   Margin="0,5,0,0"  
+                                   HeightRequest="400">
+                                       <!-- Holds the description of the task -->
+                                       <VerticalStackLayout>
+                                           <Editor 
+                                           Placeholder="Add Description" 
+                                           FontSize="Small"
+                                           PlaceholderColor="Black"
+                                           FontAttributes="Bold" 
+                                           HeightRequest="400"
+                                           x:Name="Task_description"/>
+                                       </VerticalStackLayout>
+                                   </Border>
+                               </VerticalStackLayout>
             </Border>
         </VerticalStackLayout>
 
-        <Button Text="+" FontSize="50" HorizontalOptions="Center" VerticalOptions="End" BackgroundColor="Transparent" TextColor="Black"/>
+        <Button Text="+" FontSize="50" HorizontalOptions="Center" VerticalOptions="End" BackgroundColor="Transparent" TextColor="Black" Clicked="Add_Todo_Clicked"/>
 
     </VerticalStackLayout>
 </ContentPage>

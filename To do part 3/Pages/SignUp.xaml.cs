@@ -20,11 +20,11 @@ public partial class SignUp : ContentPage
         Debug.WriteLine("Sign Up Clicked");
 
         // Replace these with actual user input values from the UI
-        var firstName = UserName.Text;
-        var lastName = UserName.Text;
+        var firstName = FirstName.Text;
+        var lastName = LastName.Text;
         var email = EmailAddress.Text;
         var password = Password.Text;
-        var confirmPassword = ConfirmPasswword.Text;
+        var confirmPassword = ConfirmPassword.Text;
 
         var signUpData = new
         {
@@ -82,7 +82,7 @@ public partial class SignUp : ContentPage
         catch (Exception ex)
         {
             Debug.WriteLine($"Exception: {ex.Message}");
-            await DisplayAlert("Error", "An error occurred. Please try again.", "OK");
+            await DisplayAlert("Error", "An error occurred. Please try again.", ex.Message.ToString(), "OK");
         }
     }
 

@@ -1,12 +1,15 @@
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Text;
+using System.Text.Json;
 using System.Windows.Input;
 namespace To_do_part_3;
 
 public partial class ToDoPage : ContentPage
 {
 	private ObservableCollection<ToDo> toDoList = new ObservableCollection<ToDo>();
+    private readonly HttpClient _httpClient = new HttpClient();
 
     public ToDoPage()
 	{
@@ -44,5 +47,45 @@ public partial class ToDoPage : ContentPage
         var button = (Button)sender;
         var toDo = (ToDo)button.CommandParameter;
         //Debug.WriteLine(toDo.Task);
+    }
+
+    private async void Get_ToDo()
+    {
+        var user_id = await SecureStorage.GetAsync("user_id");
+
+
+        var url = $"{Constants.URL}{Constants.GET_TODO}?status=active&user_id={user_id}";
+        
+        try
+        {
+            var response = await _httpClient.GetAsync(url);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine($"Response JSON: {responseContent}");
+
+            var responseJson = JsonSerializer.Deserialize<Dictionary<string, object>>(responseContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Success","Successfully retrieved data", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Error", responseJson["message"].ToString(), "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Exception: {ex.Message}", ex);
+            await DisplayAlert("Error", "An error occurred. Please try again.", ex.Message.ToString(), "OK");
+        }
+
+
+    }
+
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        Get_ToDo();
     }
 }
