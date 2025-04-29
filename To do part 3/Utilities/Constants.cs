@@ -13,7 +13,7 @@ public class Constants
     }
 
     public static readonly
-        string URL = "https://todo-list.dcism.org/";
+        string URL = "https://todo-list.dcism.org";
 
 
     public static readonly string SIGNUP = "signup_action.php";

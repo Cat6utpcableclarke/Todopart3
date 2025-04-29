@@ -42,20 +42,41 @@ public partial class SignUp : ContentPage
             var response = await _httpClient.PostAsync($"{Constants.URL}{Constants.SIGNUP}", jsonContent);
 
             var responseContent = await response.Content.ReadAsStringAsync();
-            var responseJson = JsonSerializer.Deserialize<Dictionary<string, object>>(responseContent);
-            Debug.WriteLine($"Raw API Response: {responseContent}"); 
 
+            // Log the raw response content
+            Debug.WriteLine("Raw Response Content:");
+            Debug.WriteLine(responseContent);
 
-            if (response.IsSuccessStatusCode)
+            // Deserialize the response
+            var responseJson = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(responseContent);
+
+            if (responseJson != null && responseJson.ContainsKey("status"))
             {
-                Debug.WriteLine("Sign Up Successful");
-                await DisplayAlert("Success", responseJson["message"].ToString(), "OK");
-                await Shell.Current.GoToAsync("//ToDoPage");
+                // Extract the status as an integer
+                var status = responseJson["status"].GetInt32();
+                Debug.WriteLine($"Status Code: {status}");
+
+                if (status == 200)
+                {
+                    Debug.WriteLine("Sign Up Successful");
+                    await DisplayAlert("Success", responseJson["message"].GetString(), "OK");
+                    await Shell.Current.GoToAsync("//ToDoPage");
+                }
+                else if (status == 400)
+                {
+                    Debug.WriteLine("Sign Up Failed: Email already exists.");
+                    await DisplayAlert("Error", responseJson["message"].GetString(), "OK");
+                }
+                else
+                {
+                    Debug.WriteLine("Unexpected Status Code");
+                    await DisplayAlert("Error", "An unexpected error occurred. Please try again.", "OK");
+                }
             }
             else
             {
-                Debug.WriteLine($"Sign Up Failed: {response.StatusCode}");
-                await DisplayAlert("Error", responseJson["message"].ToString(), "OK");
+                Debug.WriteLine("Unexpected Response Format");
+                await DisplayAlert("Error", "An unexpected error occurred. Please try again.", "OK");
             }
         }
         catch (Exception ex)
@@ -64,6 +85,8 @@ public partial class SignUp : ContentPage
             await DisplayAlert("Error", "An error occurred. Please try again.", ex.Message.ToString(), "OK");
         }
     }
+
+
 
     private async void SignInButtonClicked(object sender, EventArgs e)
     {

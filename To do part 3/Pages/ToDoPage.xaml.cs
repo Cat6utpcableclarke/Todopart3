@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using System.Windows.Input;
-
 namespace To_do_part_3;
 
 public partial class ToDoPage : ContentPage
@@ -22,9 +21,8 @@ public partial class ToDoPage : ContentPage
         //ToDos.ItemsSource = toDoList;
     }
 
-	
 
-	private async void Edit_Clicked(object sender, EventArgs e)
+    private async void Edit_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushModalAsync(new EditToDo(), true);
         Debug.WriteLine("Edit Clicked");
