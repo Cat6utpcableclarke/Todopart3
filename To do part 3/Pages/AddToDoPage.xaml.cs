@@ -32,7 +32,7 @@ public partial class AddToDoPage : ContentPage
             item_description = description,
             user_id = userId
         };
-
+        Debug.Write(todo_data);
         var jsonContent = new StringContent(JsonSerializer.Serialize(todo_data), Encoding.UTF8, "application/json");
         try
         {

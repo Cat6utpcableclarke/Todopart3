@@ -1,4 +1,3 @@
-
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
@@ -15,9 +14,10 @@ public partial class ToDoPage : ContentPage
 	{
 		InitializeComponent();
         Shell.SetNavBarIsVisible(this, false);
-        //toDoList.Add(new ToDo (1,"Task1","task1", false));
-        //toDoList.Add(new ToDo (2,"Task2","task2", false));
-        //toDoList.Add(new ToDo (3,"Task3", "task3", false));
+        Get_ToDo();
+        //toDoList.Add(new ToDo(1, "Task1", "task1", "true", 1, (DateTime.ParseExact("2025-05-04 19:58:40", "yyyy-MM-dd HH:mm:ss", null))));
+        //toDoList.Add(new ToDo(2, "Task2", "task2", "true", 1, (DateTime.ParseExact("2025-05-04 19:58:40", "yyyy-MM-dd HH:mm:ss", null))));
+        //toDoList.Add(new ToDo(3, "Task3", "task3", "true", 1, (DateTime.ParseExact("2025-05-04 19:58:40", "yyyy-MM-dd HH:mm:ss", null))));
         //ToDos.ItemsSource = toDoList;
     }
 
@@ -53,20 +53,49 @@ public partial class ToDoPage : ContentPage
     {
         var user_id = await SecureStorage.GetAsync("user_id");
 
-
         var url = $"{Constants.URL}{Constants.GET_TODO}?status=active&user_id={user_id}";
-        
+
         try
         {
             var response = await _httpClient.GetAsync(url);
             var responseContent = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine($"Response JSON: {responseContent}");
+            Debug.WriteLine($"Response JSON for the actual todo: {responseContent}");
 
-            var responseJson = JsonSerializer.Deserialize<Dictionary<string, object>>(responseContent);
+            var responseJson = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(responseContent);
 
             if (response.IsSuccessStatusCode)
             {
-                await DisplayAlert("Success","Successfully retrieved data", "OK");
+                await DisplayAlert("Success", "Successfully retrieved data", "OK");
+                if (responseJson.TryGetValue("data", out var dataElement) && dataElement.ValueKind == JsonValueKind.Object)
+                {
+                    toDoList.Clear();
+                    foreach (var property in dataElement.EnumerateObject())
+                    {
+                        var item = property.Value;
+
+                        int id = item.GetProperty("item_id").GetInt32();
+                        string title = item.GetProperty("item_name").GetString() ?? string.Empty;
+                        string description = item.GetProperty("item_description").GetString() ?? string.Empty;
+                        string status = item.GetProperty("status").GetString() ?? string.Empty;
+                        int userID = item.GetProperty("user_id").GetInt32();
+                        string datetimeString = item.GetProperty("dateTime_created").GetString() ?? string.Empty;
+                        DateTime timeM = DateTime.ParseExact(datetimeString, "yyyy-MM-dd HH:mm:ss", null);
+
+
+                        Debug.WriteLine($"Items in JSON: {id}, {title}, {description}, {status}, {userID}, {timeM}");
+
+                        var todo = (new ToDo(id, title, description, status, userID, timeM));
+                        Debug.WriteLine("Inside the todo: ", todo);
+
+                        toDoList.Add(todo);
+                    }
+
+                    ToDos.ItemsSource = toDoList;
+                }
+                else
+                {
+                    Debug.WriteLine("Error in getting data");
+                }
             }
             else
             {
@@ -78,14 +107,6 @@ public partial class ToDoPage : ContentPage
             Debug.WriteLine($"Exception: {ex.Message}", ex);
             await DisplayAlert("Error", "An error occurred. Please try again.", ex.Message.ToString(), "OK");
         }
-
-
     }
 
-
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        Get_ToDo();
-    }
 }
