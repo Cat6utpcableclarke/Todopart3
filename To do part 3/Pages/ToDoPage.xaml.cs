@@ -38,14 +38,51 @@ public partial class ToDoPage : ContentPage
     {
         Debug.WriteLine("Add Clicked");
         //await Shell.Current.GoToAsync("///AddToDo");
-        await Navigation.PushModalAsync(new AddToDoPage(), true);
+        var addToDoPage = new AddToDoPage
+        {
+            ReloadPage = ReloadPage
+        };
+        await Navigation.PushModalAsync(addToDoPage, true);
     }
 
-    private void Done_Clicked(object sender, EventArgs e)
+    private async void Done_Clicked(object sender, EventArgs e)
     {
         Debug.WriteLine("Done Clicked");
         var button = (Button)sender;
         var toDo = (ToDo)button.CommandParameter;
+        Debug.WriteLine(toDo.ItemId);
+
+        var data = new
+        {
+            status = "inactive",
+            item_id = toDo.ItemId
+        };
+        
+        var url = $"{Constants.URL}{Constants.CHANGE_TODOSTAT}?status=inactive&item_id={toDo.ItemId}";
+        var jsonContent = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json"); 
+        try {
+            var response = await _httpClient.PostAsync(url,jsonContent);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine($"Response: {responseContent}");
+            var responseJson = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(responseContent);
+
+            if (responseJson != null && responseJson.ContainsKey("status")) {
+
+                var status = responseJson["status"].GetInt32();
+                if (status == 200)
+                {
+                    await DisplayAlert("Success", responseJson["message"].GetString(), "OK");
+                }
+                else {
+                    await DisplayAlert("Error", "An unexpected status code was returned.", "OK");
+                }
+            }
+        } catch (Exception ex) {
+            Debug.WriteLine($"Exception: {ex.Message}");
+            await DisplayAlert("Error", "An error occurred. Please try again.", "OK");
+        }
+        ReloadPage();
+
         //Debug.WriteLine(toDo.Task);
     }
 
@@ -107,6 +144,12 @@ public partial class ToDoPage : ContentPage
             Debug.WriteLine($"Exception: {ex.Message}", ex);
             await DisplayAlert("Error", "An error occurred. Please try again.", ex.Message.ToString(), "OK");
         }
+    }
+
+    private void ReloadPage()
+    {
+        Debug.WriteLine("Reloading ToDoPage...");
+         Get_ToDo(); // Refresh the data
     }
 
 }

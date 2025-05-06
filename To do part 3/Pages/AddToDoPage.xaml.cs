@@ -9,7 +9,7 @@ namespace To_do_part_3;
 public partial class AddToDoPage : ContentPage
 {
     private readonly HttpClient _httpClient = new HttpClient();
-
+    public Action ReloadPage { get; set; }
     public AddToDoPage()
     {
         InitializeComponent();
@@ -43,7 +43,10 @@ public partial class AddToDoPage : ContentPage
             {
                 Debug.WriteLine("Todo Successfully Added");
                 await DisplayAlert("Success", responseJson["message"].ToString(), "OK");
+
+                ReloadPage?.Invoke();
                 await Navigation.PopModalAsync();
+
             }
             else
             {
