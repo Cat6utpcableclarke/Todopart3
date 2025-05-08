@@ -15,10 +15,6 @@ public partial class ToDoPage : ContentPage
 		InitializeComponent();
         Shell.SetNavBarIsVisible(this, false);
         Get_ToDo();
-        //toDoList.Add(new ToDo(1, "Task1", "task1", "true", 1, (DateTime.ParseExact("2025-05-04 19:58:40", "yyyy-MM-dd HH:mm:ss", null))));
-        //toDoList.Add(new ToDo(2, "Task2", "task2", "true", 1, (DateTime.ParseExact("2025-05-04 19:58:40", "yyyy-MM-dd HH:mm:ss", null))));
-        //toDoList.Add(new ToDo(3, "Task3", "task3", "true", 1, (DateTime.ParseExact("2025-05-04 19:58:40", "yyyy-MM-dd HH:mm:ss", null))));
-        //ToDos.ItemsSource = toDoList;
     }
 
 
@@ -38,11 +34,12 @@ public partial class ToDoPage : ContentPage
     {
         Debug.WriteLine("Add Clicked");
         //await Shell.Current.GoToAsync("///AddToDo");
-        var addToDoPage = new AddToDoPage
-        {
-            ReloadPage = ReloadPage
-        };
-        await Navigation.PushModalAsync(addToDoPage, true);
+        //var addToDoPage = new AddToDoPage
+        //{
+        //    ReloadPage = ReloadPage
+        //};
+        //await Navigation.PushModalAsync(addToDoPage, true);
+        await Navigation.PushModalAsync(new AddToDoPage());
     }
 
     private async void Done_Clicked(object sender, EventArgs e)
@@ -71,7 +68,7 @@ public partial class ToDoPage : ContentPage
                 var status = responseJson["status"].GetInt32();
                 if (status == 200)
                 {
-                    await DisplayAlert("Success", responseJson["message"].GetString(), "OK");
+                    //Do Nothing
                 }
                 else {
                     await DisplayAlert("Error", "An unexpected status code was returned.", "OK");
@@ -86,7 +83,7 @@ public partial class ToDoPage : ContentPage
         //Debug.WriteLine(toDo.Task);
     }
 
-    private async void Get_ToDo()
+    private async Task Get_ToDo()
     {
         var user_id = await SecureStorage.GetAsync("user_id");
 
@@ -102,7 +99,7 @@ public partial class ToDoPage : ContentPage
 
             if (response.IsSuccessStatusCode)
             {
-                await DisplayAlert("Success", "Successfully retrieved data", "OK");
+                
                 if (responseJson.TryGetValue("data", out var dataElement) && dataElement.ValueKind == JsonValueKind.Object)
                 {
                     toDoList.Clear();
@@ -115,8 +112,7 @@ public partial class ToDoPage : ContentPage
                         string description = item.GetProperty("item_description").GetString() ?? string.Empty;
                         string status = item.GetProperty("status").GetString() ?? string.Empty;
                         int userID = item.GetProperty("user_id").GetInt32();
-                        string datetimeString = item.GetProperty("dateTime_created").GetString() ?? string.Empty;
-                        DateTime timeM = DateTime.ParseExact(datetimeString, "yyyy-MM-dd HH:mm:ss", null);
+                        DateTime timeM = DateTime.ParseExact(item.GetProperty("dateTime_created").GetString(), "yyyy-MM-dd HH:mm:ss", null);
 
 
                         Debug.WriteLine($"Items in JSON: {id}, {title}, {description}, {status}, {userID}, {timeM}");
@@ -146,10 +142,17 @@ public partial class ToDoPage : ContentPage
         }
     }
 
-    private void ReloadPage()
+    private async void ReloadPage()
     {
         Debug.WriteLine("Reloading ToDoPage...");
-         Get_ToDo(); // Refresh the data
+        await Get_ToDo(); // Refresh the data
     }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await Get_ToDo();
+    }
+
+
 
 }
