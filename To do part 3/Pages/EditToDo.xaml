@@ -2,74 +2,71 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="To_do_part_3.EditToDo"
-             Title="Edit To Do Task">
-    <VerticalStackLayout>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <ImageButton 
-                Grid.Column="0"
-                Source="back_button_icon.png"
-                Clicked="OnClickReturn"
-                MaximumWidthRequest="20"
-                MaximumHeightRequest="20"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                BackgroundColor="Transparent"
-                Margin="0,20,50,5"
-                />
-            <Label 
-                Grid.Column="1"
-                Text="Add Task"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" 
-                FontSize="Large"
-                FontAttributes="Bold"
-                Margin="0,20,0,5"/>
+             Title="Edit Current Task">
+    <ContentPage.Content>
+        <VerticalStackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <ImageButton 
+                 Grid.Column="0"
+                 Source="back_button_icon.png"
+                 Clicked="OnClickReturn"
+                 MaximumWidthRequest="20"
+                 MaximumHeightRequest="40"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Start"
+                 BackgroundColor="Transparent"
+                 Margin="40,20,10,5"
+                 />
+                <Label 
+                 Grid.Column="1"
+                 Grid.ColumnSpan="3"
+                 Text="Edit Completed Task"
+                 VerticalOptions="Center" 
+                 HorizontalOptions="Start" 
+                 FontSize="Large"
+                 FontAttributes="Bold"
+                 Margin="0,20,50,5"/>
+            </Grid>
 
-        </Grid>
+            <BoxView HeightRequest="1" Color="Gray" Margin="25,10,25,10"/>
 
-        <BoxView HeightRequest="1" Color="Gray" Margin="25,10,25,10"/>
+            <VerticalStackLayout Margin="20,10,20,0" Spacing="15">
+                <Border
+                 BackgroundColor="#C3D44B" 
+                 StrokeShape="RoundRectangle 15"
+                 Padding="10">
+                    <VerticalStackLayout>
+                        <Entry Text="{Binding ItemName}"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        TextColor="Black"/>
+                        <Border 
+                         BackgroundColor="#A7B834" 
+                         StrokeShape="RoundRectangle 10"
+                         Padding="10" 
+                         Margin="0,5,0,0"  
+                         HeightRequest="300">
+                            <VerticalStackLayout>
+                                <Editor Text="{Binding ItemDescription}" FontSize="Small" FontAttributes="Bold" HeightRequest="300"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
 
-        <VerticalStackLayout Margin="20,10,20,0" Spacing="15">
-
-            <Border
-                BackgroundColor="#C3D44B" 
-                StrokeShape="RoundRectangle 15"
-                Padding="10" 
-                >
-            
-                <VerticalStackLayout>
-                    <Entry Text="Buy iPhone"
-                           FontSize="Medium"
-                           FontAttributes="Bold"
-                           TextColor="Black"/>
-                    <Border 
-                        BackgroundColor="#A7B834" 
-                        StrokeShape="RoundRectangle 10"
-                        Padding="10" 
-                        Margin="0,5,0,0"  
-                        HeightRequest="300">
-                        <VerticalStackLayout>
-                            <Editor Text="1. Buy Phone" FontSize="Small" FontAttributes="Bold" HeightRequest="300"/>
-                        </VerticalStackLayout>
-                    </Border>
-                </VerticalStackLayout>
-                
-                
-            </Border>
-
-            <!-- Action Buttons -->
-            <Button Text="Update" BackgroundColor="LightBlue" TextColor="Black"/>
-            <Button Text="Complete" BackgroundColor="LightBlue" TextColor="Black"/>
-            <Button Text="Delete" BackgroundColor="LightCoral" TextColor="Black"/>
-
+                <!-- Action Buttons -->
+                <Button Text="Update" BackgroundColor="LightBlue" TextColor="Black" Clicked="UpdateTask"/>
+                <Button Text="Complete" BackgroundColor="LightBlue" TextColor="Black"/>
+                <Button Text="Delete" BackgroundColor="LightCoral" TextColor="Black"/>
+            </VerticalStackLayout>
         </VerticalStackLayout>
-    </VerticalStackLayout>
+    </ContentPage.Content>
 </ContentPage>

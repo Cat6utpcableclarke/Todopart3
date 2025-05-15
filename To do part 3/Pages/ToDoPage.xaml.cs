@@ -20,12 +20,14 @@ public partial class ToDoPage : ContentPage
 
     private async void Edit_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushModalAsync(new EditToDo(), true);
-        Debug.WriteLine("Edit Clicked");
 
+        var toDo = (ToDo)((Button)sender).CommandParameter;
+        Debug.WriteLine($"MAO NI ANG ITEM ID: {toDo.ItemId}");
+
+        await Navigation.PushModalAsync(new EditToDo(toDo));
     }
 
-	private async void Delete_Clicked(object sender, EventArgs e)
+    private void Delete_Clicked(object sender, EventArgs e)
     {
         
         var button = (Button)sender;
@@ -62,12 +64,6 @@ public partial class ToDoPage : ContentPage
     private async void Add_Clicked(object sender, EventArgs e)
     {
         Debug.WriteLine("Add Clicked");
-        //await Shell.Current.GoToAsync("///AddToDo");
-        //var addToDoPage = new AddToDoPage
-        //{
-        //    ReloadPage = ReloadPage
-        //};
-        //await Navigation.PushModalAsync(addToDoPage, true);
         await Navigation.PushModalAsync(new AddToDoPage());
     }
 
