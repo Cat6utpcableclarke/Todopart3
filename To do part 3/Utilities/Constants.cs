@@ -22,6 +22,7 @@ public class Constants
     public static readonly string ADD_TODO = "addItem_action.php";
     public static readonly string GET_TODO = "getItems_action.php";
     public static readonly string CHANGE_TODOSTAT = "statusItem_action.php";
-    
+    public static readonly string DELETE = "deleteItem_action.php";
+
 
 }

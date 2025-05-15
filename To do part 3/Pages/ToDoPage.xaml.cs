@@ -25,9 +25,38 @@ public partial class ToDoPage : ContentPage
 
     }
 
-	private void Delete_Clicked(object sender, EventArgs e)
+	private async void Delete_Clicked(object sender, EventArgs e)
     {
+        
+        var button = (Button)sender;
+        var todeleteToDo = (ToDo)button.CommandParameter;
+        Debug.WriteLine(todeleteToDo.ItemId);
+        var URL = $"{Constants.URL}{Constants.DELETE}?item_id={todeleteToDo.ItemId}";
         Debug.WriteLine("Delete Clicked");
+
+        try
+        {
+            var response = await _httpClient.DeleteAsync(URL);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var responseJson = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(responseContent);
+            
+            var status = responseJson["status"].GetInt32();
+
+            if (status == 200)
+            {
+                Debug.WriteLine($"{responseJson["message"].ToString}");
+                ReloadPage();
+            }
+            else { 
+                Debug.WriteLine($"Error: {responseJson["message"].ToString}");
+            }
+
+        }
+        catch (Exception ex) {
+            Debug.WriteLine("Error", "skibiddi", "OK");
+        }
+       
+
     }
 
     private async void Add_Clicked(object sender, EventArgs e)
@@ -82,6 +111,7 @@ public partial class ToDoPage : ContentPage
 
         //Debug.WriteLine(toDo.Task);
     }
+
 
     private async Task Get_ToDo()
     {
