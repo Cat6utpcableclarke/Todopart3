@@ -11,8 +11,21 @@ public partial class SignIn : ContentPage
     {
         InitializeComponent();
         Shell.SetNavBarIsVisible(this, false);
-    }
+        CheckAndNavigateToToDoPage();
 
+    }
+    private async void CheckAndNavigateToToDoPage()
+    {
+        var userId = await SecureStorage.GetAsync("user_id");
+        var fName = await SecureStorage.GetAsync("fname");
+        var lName = await SecureStorage.GetAsync("lname");
+
+        if (!string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(fName) && !string.IsNullOrEmpty(lName))
+        {
+            // All required values exist, navigate to ToDoPage
+            await Shell.Current.GoToAsync("//ToDoPage");
+        }
+    }
     public async void SignInClicked(object sender, EventArgs e)
     {
         Debug.WriteLine("Sign In Clicked");
@@ -53,7 +66,12 @@ public partial class SignIn : ContentPage
 
                     var data = JsonSerializer.Deserialize<Dictionary<string, object>>(responseJson["data"].ToString());
                     var userId = data["id"].ToString();
+                    var fName = data["fname"].ToString();
+                    var lName = data["lname"].ToString() ;
                     await SecureStorage.SetAsync("user_id", userId);
+                    await SecureStorage.SetAsync("fname", fName);
+                    await SecureStorage.SetAsync("lname", lName);
+                    Debug.WriteLine(userId, fName, lName);
                     await Shell.Current.GoToAsync("//ToDoPage");
                 }
                 else if (status == 400)

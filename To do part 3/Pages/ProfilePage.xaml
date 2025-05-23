@@ -30,20 +30,20 @@
         </Border>
         <VerticalStackLayout
             Margin="0,25,0,0">
-            <Label
-                Text="Clarke Steven Cañal"
+            <Label x:Name="Name"
+                Text=""
                 FontSize="25"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"/>
             <Label
-                Text="My name is Clarke Steven Cañal and I am a master at programming and networking."
+                x:Name="Desc"
+                Text="Tell us about yourself!!"
                 Margin="50,10,50,0"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                
                 FontSize="15"/>
         </VerticalStackLayout>
-            <Button Text="Sign Out" BackgroundColor="LightCoral" TextColor="Black" Margin="30,30,30,10"/>
+            <Button Text="Sign Out" BackgroundColor="LightCoral" Clicked="SignOut" TextColor="Black" Margin="30,30,30,10"/>
             <Button Text="Edit Account" BackgroundColor="LightBlue" TextColor="Black" Margin="30,0,30,10" Clicked="EditProfile"/>
     </VerticalStackLayout>
 </ContentPage>
