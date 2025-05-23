@@ -27,7 +27,7 @@ public partial class ToDoPage : ContentPage
         await Navigation.PushModalAsync(new EditToDo(toDo));
     }
 
-    private void Delete_Clicked(object sender, EventArgs e)
+    private async void  Delete_Clicked(object sender, EventArgs e)
     {
         
         var button = (Button)sender;
