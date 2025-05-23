@@ -63,9 +63,9 @@
                 </Border>
 
                 <!-- Action Buttons -->
-                <Button Text="Update" BackgroundColor="LightBlue" TextColor="Black" Clicked="UpdateTask"/>
-                <Button Text="Complete" BackgroundColor="LightBlue" TextColor="Black"/>
-                <Button Text="Delete" BackgroundColor="LightCoral" TextColor="Black"/>
+                <Button Text="Update" BackgroundColor="LightBlue" TextColor="Black" Clicked="UpdateTask" CommandParameter="{Binding .}"/>
+                <Button Text="Complete" BackgroundColor="LightBlue" TextColor="Black" Clicked="CompleteTask" CommandParameter="{Binding .}"/>
+                <Button Text="Delete" BackgroundColor="LightCoral" TextColor="Black" Clicked="DeleteTask" CommandParameter="{Binding .}"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ContentPage.Content>

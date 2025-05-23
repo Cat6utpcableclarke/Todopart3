@@ -80,7 +80,7 @@ public partial class ToDoPage : ContentPage
             item_id = toDo.ItemId
         };
         
-        var url = $"{Constants.URL}{Constants.CHANGE_TODOSTAT}?status=inactive&item_id={toDo.ItemId}";
+        var url = $"{Constants.URL}{Constants.CHANGE_TODOSTAT}";
         var jsonContent = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json"); 
         try {
             var response = await _httpClient.PostAsync(url,jsonContent);

@@ -10,11 +10,11 @@ public partial class EditToDo : ContentPage
     private ToDo _toDo;
     private readonly HttpClient _httpClient = new HttpClient();
     public EditToDo(ToDo todo)
-	{
+    {
         InitializeComponent();
         _toDo = todo;
         BindingContext = _toDo;
-	}
+    }
     private async void OnClickReturn(object sender, EventArgs e)
     {
         await Navigation.PopModalAsync();
@@ -43,7 +43,7 @@ public partial class EditToDo : ContentPage
                 Debug.WriteLine("Todo Successfully Added");
                 await DisplayAlert("Success", responseJson["message"].ToString(), "OK");
 
-  
+
                 await Navigation.PopModalAsync();
 
             }
@@ -60,6 +60,84 @@ public partial class EditToDo : ContentPage
         }
 
     }
+    
+    private async void CompleteTask(object sender, EventArgs e) 
+    {
+        Debug.WriteLine("Done Clicked");
+        var button = (Button)sender;
+        var toDo = (ToDo)button.CommandParameter;
+        Debug.WriteLine(toDo.ItemId);
 
+        var data = new
+        {
+            status = "inactive",
+            item_id = toDo.ItemId
+        };
 
+        var url = $"{Constants.URL}{Constants.CHANGE_TODOSTAT}";
+        var jsonContent = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
+        try
+        {
+            var response = await _httpClient.PostAsync(url, jsonContent);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine($"Response: {responseContent}");
+            var responseJson = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(responseContent);
+
+            if (responseJson != null && responseJson.ContainsKey("status"))
+            {
+
+                var status = responseJson["status"].GetInt32();
+                if (status == 200)
+                {
+                    //Do Nothing
+                }
+                else
+                {
+                    await DisplayAlert("Error", "An unexpected status code was returned.", "OK");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Exception: {ex.Message}");
+            await DisplayAlert("Error", "An error occurred. Please try again.", "OK");
+        }
+        await Navigation.PopModalAsync();
+    }
+
+    private async void DeleteTask(object sender, EventArgs e) 
+    {
+
+        var button = (Button)sender;
+        var todeleteToDo = (ToDo)button.CommandParameter;
+        Debug.WriteLine(todeleteToDo.ItemId);
+        var URL = $"{Constants.URL}{Constants.DELETE}?item_id={todeleteToDo.ItemId}";
+        Debug.WriteLine("Delete Clicked");
+
+        try
+        {
+            var response = await _httpClient.DeleteAsync(URL);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var responseJson = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(responseContent);
+
+            var status = responseJson["status"].GetInt32();
+
+            if (status == 200)
+            {
+                Debug.WriteLine($"{responseJson["message"].ToString}");
+
+            }
+            else
+            {
+                Debug.WriteLine($"Error: {responseJson["message"].ToString}");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+        await Navigation.PopModalAsync();
+    }
 }

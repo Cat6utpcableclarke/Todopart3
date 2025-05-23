@@ -39,8 +39,8 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Row="0" Grid.Column="0" Text="{Binding ItemName}" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black"/>
-                                    <Button Grid.Row="0" Grid.Column="1" Text="✏️" Clicked="Edit_Clicked" HorizontalOptions="Center" BackgroundColor="Transparent" FontSize="Large"/>
-                                    <Button Grid.Row="0" Grid.Column="2" Text="🗑️" Clicked="Delete_Clicked" HorizontalOptions="Center" BackgroundColor="Transparent" FontSize="Large"/>
+                                    <Button Grid.Row="0" Grid.Column="1" Text="✏️" Clicked="Edit_Clicked"  CommandParameter="{Binding .}" HorizontalOptions="Center" BackgroundColor="Transparent" FontSize="Large"/>
+                                    <Button Grid.Row="0" Grid.Column="2" Text="🗑️" Clicked="Delete_Clicked" CommandParameter="{Binding .}" HorizontalOptions="Center" BackgroundColor="Transparent" FontSize="Large"/>
                                     <Button Grid.Row="0" Grid.Column="3" Text="✔️" Clicked="Undone_Clicked" CommandParameter="{Binding .}" HorizontalOptions="End" BackgroundColor="Transparent"/>
                                 </Grid>
                             </Border>

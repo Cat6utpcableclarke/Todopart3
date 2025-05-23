@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 namespace To_do_part_3;
 
 public partial class CompletedToDo : ContentPage
@@ -16,17 +17,46 @@ public partial class CompletedToDo : ContentPage
     }
 
 
-    private void Delete_Clicked(object sender, EventArgs e)
+    private async void Delete_Clicked(object sender, EventArgs e)
     {
+        var button = (Button)sender;
+        var todeleteToDo = (ToDo)button.CommandParameter;
+        Debug.WriteLine(todeleteToDo.ItemId);
+        var URL = $"{Constants.URL}{Constants.DELETE}?item_id={todeleteToDo.ItemId}";
         Debug.WriteLine("Delete Clicked");
+
+        try
+        {
+            var response = await _httpClient.DeleteAsync(URL);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var responseJson = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(responseContent);
+
+            var status = responseJson["status"].GetInt32();
+
+            if (status == 200)
+            {
+                Debug.WriteLine($"{responseJson["message"].ToString}");
+                ReloadPage();
+            }
+            else
+            {
+                Debug.WriteLine($"Error: {responseJson["message"].ToString}");
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Error", "skibiddi", "OK");
+        }
 
     }
 
     private async void Edit_Clicked(object sender, EventArgs e)
     {
+         var toDo = (ToDo)((Button)sender).CommandParameter;
         Debug.WriteLine("Edit Clicked");
 
-        await Navigation.PushModalAsync(new EditCompleted(), true);
+        await Navigation.PushModalAsync(new EditCompleted(toDo), true);
     }
 
     private async Task Get_ToDo()
@@ -132,10 +162,10 @@ public partial class CompletedToDo : ContentPage
 
         //Debug.WriteLine(toDo.Task);
     }
-    private void ReloadPage()
+    private async void ReloadPage()
     {
         Debug.WriteLine("Reloading ToDoPage...");
-        Get_ToDo(); // Refresh the data
+       await  Get_ToDo(); // Refresh the data
     }
 
     protected override async void OnAppearing()

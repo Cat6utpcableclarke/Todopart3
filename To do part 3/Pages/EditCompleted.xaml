@@ -45,7 +45,7 @@
                  StrokeShape="RoundRectangle 15"
                  Padding="10">
                     <VerticalStackLayout>
-                        <Entry Text="Buy iPhone"
+                        <Entry Text="{Binding ItemName}"
                         FontSize="Medium"
                         FontAttributes="Bold"
                         TextColor="Black"/>
@@ -56,16 +56,16 @@
                          Margin="0,5,0,0"  
                          HeightRequest="300">
                             <VerticalStackLayout>
-                                <Editor Text="1. Buy Phone" FontSize="Small" FontAttributes="Bold" HeightRequest="300"/>
+                                <Editor Text="{Binding ItemDescription}" FontSize="Small" FontAttributes="Bold" HeightRequest="300"/>
                             </VerticalStackLayout>
                         </Border>
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- Action Buttons -->
-                <Button Text="Update" BackgroundColor="LightBlue" TextColor="Black"/>
-                <Button Text="Complete" BackgroundColor="LightBlue" TextColor="Black"/>
-                <Button Text="Delete" BackgroundColor="LightCoral" TextColor="Black"/>
+                <Button Text="Update" BackgroundColor="LightBlue" TextColor="Black" Clicked="Update" CommandParameter="{Binding .}"/>
+                <Button Text="Incomplete" BackgroundColor="LightBlue" TextColor="Black" Clicked="Incomplete" CommandParameter="{Binding .}"/>
+                <Button Text="Delete" BackgroundColor="LightCoral" TextColor="Black" Clicked="Delete" CommandParameter="{Binding .}"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ContentPage.Content>
