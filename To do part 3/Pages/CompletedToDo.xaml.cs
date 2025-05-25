@@ -4,11 +4,13 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using To_do_part_3.Services;
 namespace To_do_part_3;
 
 public partial class CompletedToDo : ContentPage
 {
     private ObservableCollection<ToDo> toDoList = new ObservableCollection<ToDo>();
+    private readonly ToDoService _toDoService = new ToDoService(new HttpClient());
     private readonly HttpClient _httpClient = new HttpClient();
     public CompletedToDo()
 	{
@@ -19,11 +21,10 @@ public partial class CompletedToDo : ContentPage
 
     private async void Delete_Clicked(object sender, EventArgs e)
     {
-        var button = (Button)sender;
+
+        var button = (ImageButton)sender;
         var todeleteToDo = (ToDo)button.CommandParameter;
-        Debug.WriteLine(todeleteToDo.ItemId);
         var URL = $"{Constants.URL}{Constants.DELETE}?item_id={todeleteToDo.ItemId}";
-        Debug.WriteLine("Delete Clicked");
 
         try
         {
@@ -35,92 +36,52 @@ public partial class CompletedToDo : ContentPage
 
             if (status == 200)
             {
-                Debug.WriteLine($"{responseJson["message"].ToString}");
-                ReloadPage();
+                await LoadToDosAsync();  // Wait for list refresh before hiding loading
             }
             else
             {
-                Debug.WriteLine($"Error: {responseJson["message"].ToString}");
-            }
-
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine("Error", "skibiddi", "OK");
-        }
-
-    }
-
-    private async void Edit_Clicked(object sender, EventArgs e)
-    {
-         var toDo = (ToDo)((Button)sender).CommandParameter;
-        Debug.WriteLine("Edit Clicked");
-
-        await Navigation.PushModalAsync(new EditCompleted(toDo), true);
-    }
-
-    private async Task Get_ToDo()
-    {
-        var user_id = await SecureStorage.GetAsync("user_id");
-
-        var url = $"{Constants.URL}{Constants.GET_TODO}?status=inactive&user_id={user_id}";
-
-        try
-        {
-            var response = await _httpClient.GetAsync(url);
-            var responseContent = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine($"Response JSON for the actual todo: {responseContent}");
-
-            var responseJson = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(responseContent);
-
-            if (response.IsSuccessStatusCode)
-            {
-                if (responseJson.TryGetValue("data", out var dataElement) && dataElement.ValueKind == JsonValueKind.Object)
-                {
-                    toDoList.Clear();
-                    foreach (var property in dataElement.EnumerateObject())
-                    {
-                        var item = property.Value;
-
-                        int id = item.GetProperty("item_id").GetInt32();
-                        string title = item.GetProperty("item_name").GetString() ?? string.Empty;
-                        string description = item.GetProperty("item_description").GetString() ?? string.Empty;
-                        string status = item.GetProperty("status").GetString() ?? string.Empty;
-                        int userID = item.GetProperty("user_id").GetInt32();
-                        DateTime timeM = DateTime.ParseExact(item.GetProperty("dateTime_created").GetString(), "yyyy-MM-dd HH:mm:ss", null);
-
-
-                        Debug.WriteLine($"Items in JSON: {id}, {title}, {description}, {status}, {userID}, {timeM}");
-
-                        var todo = (new ToDo(id, title, description, status, userID, timeM));
-                        Debug.WriteLine("Inside the todo: ", todo);
-
-                        toDoList.Add(todo);
-                    }
-
-                    CToDos.ItemsSource = toDoList;
-                }
-                else
-                {
-                    Debug.WriteLine("Error in getting data");
-                }
-            }
-            else
-            {
+                Debug.WriteLine($"Error: {responseJson["message"].ToString()}");
                 await DisplayAlert("Error", responseJson["message"].ToString(), "OK");
             }
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Exception: {ex.Message}", ex);
-            await DisplayAlert("Error", "An error occurred. Please try again.", ex.Message.ToString(), "OK");
+            Debug.WriteLine("Error", "skibiddi", "OK");
+            await DisplayAlert("Error", "An error occurred. Please try again.", "OK");
         }
+    }
+
+    private async void Edit_Clicked(object sender, EventArgs e)
+    {
+         var toDo = (ToDo)((ImageButton)sender).CommandParameter;
+        Debug.WriteLine("Edit Clicked");
+
+        await Navigation.PushModalAsync(new EditCompleted(toDo), true);
+    }
+
+    private async Task LoadToDosAsync()
+    {
+        LoadingOverlay.IsVisible = true;
+        await Task.Delay(50); // Let loading animation start
+
+        var userId = await SecureStorage.GetAsync("user_id");
+        var fetchedTodos = await _toDoService.FetchActiveToDosAsync(userId, "inactive");
+
+        toDoList = new ObservableCollection<ToDo>(fetchedTodos);
+
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            CToDos.ItemsSource = toDoList;
+        });
+
+
+        LoadingOverlay.IsVisible = false;
     }
 
     private async void Undone_Clicked(object sender, EventArgs e)
     {
         Debug.WriteLine("Done Clicked");
-        var button = (Button)sender;
+        var button = (ImageButton)sender;
         var toDo = (ToDo)button.CommandParameter;
         Debug.WriteLine(toDo.ItemId);
 
@@ -158,20 +119,17 @@ public partial class CompletedToDo : ContentPage
             Debug.WriteLine($"Exception: {ex.Message}");
             await DisplayAlert("Error", "An error occurred. Please try again.", "OK");
         }
-        ReloadPage();
+        finally
+        {
+            await LoadToDosAsync();
+        }
+    }
 
-        //Debug.WriteLine(toDo.Task);
-    }
-    private async void ReloadPage()
-    {
-        Debug.WriteLine("Reloading ToDoPage...");
-       await  Get_ToDo(); // Refresh the data
-    }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await Get_ToDo();
+        await LoadToDosAsync();
     }
 
 }
