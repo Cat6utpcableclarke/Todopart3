@@ -82,7 +82,7 @@ public partial class SignUp : ContentPage
         catch (Exception ex)
         {
             Debug.WriteLine($"Exception: {ex.Message}");
-            await DisplayAlert("Error", "An error occurred. Please try again.", ex.Message.ToString(), "OK");
+            await DisplayAlert("Error", $"An error occurred. Please try again.\nError: {ex.Message}", "OK");
         }
     }
 

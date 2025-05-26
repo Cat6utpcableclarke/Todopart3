@@ -62,7 +62,7 @@ public partial class SignIn : ContentPage
                 if (status == 200)
                 {
                     Debug.WriteLine("Sign In Successful");
-                    await DisplayAlert("Success", responseJson["message"].GetString(), "OK");
+                    await DisplayAlert("Success", "You are now signing you in", "OK");
 
                     var data = JsonSerializer.Deserialize<Dictionary<string, object>>(responseJson["data"].ToString());
                     var userId = data["id"].ToString();
@@ -94,7 +94,7 @@ public partial class SignIn : ContentPage
         catch (Exception ex)
         {
             Debug.WriteLine($"Exception: {ex.Message}");
-            await DisplayAlert("Error", "An error occurred. Please try again.", "OK");
+            await DisplayAlert("Error", $"An error occurred. Please try again.\nError: {ex.Message}", "OK");
         }
     }
 

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="To_do_part_3.EditCompleted"
+             BackgroundColor="WhiteSmoke"
              Title="Edit Completed Task">
     <ContentPage.Content>
         <VerticalStackLayout>
@@ -41,7 +42,7 @@
 
             <VerticalStackLayout Margin="20,10,20,0" Spacing="15">
                 <Border
-                 BackgroundColor="#C3D44B" 
+                 BackgroundColor="#C5D9E2" 
                  StrokeShape="RoundRectangle 15"
                  Padding="10">
                     <VerticalStackLayout>
@@ -50,7 +51,7 @@
                         FontAttributes="Bold"
                         TextColor="Black"/>
                         <Border 
-                         BackgroundColor="#A7B834" 
+                         BackgroundColor="#70f5f5f5"
                          StrokeShape="RoundRectangle 10"
                          Padding="10" 
                          Margin="0,5,0,0"  
@@ -63,9 +64,9 @@
                 </Border>
 
                 <!-- Action Buttons -->
-                <Button Text="Update" BackgroundColor="LightBlue" TextColor="Black" Clicked="Update" CommandParameter="{Binding .}"/>
-                <Button Text="Incomplete" BackgroundColor="LightBlue" TextColor="Black" Clicked="Incomplete" CommandParameter="{Binding .}"/>
-                <Button Text="Delete" BackgroundColor="LightCoral" TextColor="Black" Clicked="Delete" CommandParameter="{Binding .}"/>
+                <Button Text="Update" BackgroundColor="#0F8B8D" TextColor="White" Clicked="Update" CommandParameter="{Binding .}"/>
+                <Button Text="Undo Completion" BackgroundColor="#EC9A29" TextColor="White" Clicked="Incomplete" CommandParameter="{Binding .}"/>
+                <Button Text="Delete" BackgroundColor="#A8201A" TextColor="White" Clicked="Delete" CommandParameter="{Binding .}"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ContentPage.Content>

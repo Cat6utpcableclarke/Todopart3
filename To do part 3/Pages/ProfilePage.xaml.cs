@@ -24,15 +24,12 @@ public partial class ProfilePage : ContentPage
 		}
 		Name.Text = fName +" "+ lName;
 	}
-	private async void EditProfile(object sender, EventArgs e)
-	{
-		await Navigation.PushModalAsync(new EditProfile(), true);
-	}
 
     private async void SignOut(object sender, EventArgs e)
     {
 		SecureStorage.Remove("fname");
 		SecureStorage.Remove("lname");
+		SecureStorage.Remove("user_id");
 		await Shell.Current.GoToAsync("//SignIn");
     }
 

@@ -131,7 +131,6 @@ public partial class ToDoPage : ContentPage
             ToDos.ItemsSource = toDoList;
         });
 
-
         LoadingOverlay.IsVisible = false;
     }
 

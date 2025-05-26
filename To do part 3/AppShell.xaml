@@ -4,6 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:To_do_part_3"
     Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="WhiteSmoke"
+    Shell.TabBarUnselectedColor="Black"
+    Shell.TabBarTitleColor="#A8201A"
+    Shell.TabBarForegroundColor="#A8201A"
     Title="To_do_part_3">
 
     <TabBar x:Name="MainTabBar">
@@ -36,12 +40,6 @@
         Title="EditToDo"
         ContentTemplate="{DataTemplate local:EditToDo}"
         Route="EditToDo"
-    />
-
-    <ShellContent
-        Title="EditProfile"
-        ContentTemplate="{DataTemplate local:EditProfile}"
-        Route="EditProfile"
     />
 
     <ShellContent

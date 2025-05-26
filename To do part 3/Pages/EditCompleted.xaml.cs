@@ -95,7 +95,7 @@ public partial class EditCompleted : ContentPage
         catch (Exception ex)
         {
             Debug.WriteLine($"Exception: {ex.Message}");
-            await DisplayAlert("Error", "An error occurred. Please try again.", "OK");
+            await DisplayAlert("Error", $"An error occurred. Please try again.\nError: {ex.Message}", "OK");
         }
         await Navigation.PopModalAsync();
     }
@@ -120,7 +120,7 @@ public partial class EditCompleted : ContentPage
             var responseJson = JsonSerializer.Deserialize<Dictionary<string, object>>(responseContent);
             if (response.IsSuccessStatusCode)
             {
-                Debug.WriteLine("Todo Successfully Added");
+                Debug.WriteLine("Todo Successfully Updated");
                 await DisplayAlert("Success", responseJson["message"].ToString(), "OK");
 
 
@@ -136,7 +136,7 @@ public partial class EditCompleted : ContentPage
         catch (Exception ex)
         {
             Debug.WriteLine($"Error in ToDoUpdate: {ex.Message}");
-            await DisplayAlert("Error", "An error occured. Please try again.", ex.Message.ToString(), "OK");
+            await DisplayAlert("Error", $"An error occured. Please try again.\nError: {ex.Message}", "OK");
         }
 
     }

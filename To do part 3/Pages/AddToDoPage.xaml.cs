@@ -9,7 +9,7 @@ namespace To_do_part_3;
 public partial class AddToDoPage : ContentPage
 {
     private readonly HttpClient _httpClient = new HttpClient();
-    public Action ReloadPage { get; set; }
+    //public Action ReloadPage { get; set; }
     public AddToDoPage()
     {
         InitializeComponent();
@@ -44,7 +44,7 @@ public partial class AddToDoPage : ContentPage
                 Debug.WriteLine("Todo Successfully Added");
                 await DisplayAlert("Success", responseJson["message"].ToString(), "OK");
 
-                ReloadPage?.Invoke();
+                //ReloadPage?.Invoke();
                 await Navigation.PopModalAsync();
 
             }
@@ -57,7 +57,8 @@ public partial class AddToDoPage : ContentPage
         catch (Exception ex)
         {
             Debug.WriteLine($"Error in todoadd: {ex.Message}");
-            await DisplayAlert("Error", "An error occured. Please try again.", ex.Message.ToString(), "OK");
+            await DisplayAlert("Error", $"An error occured. Please try again.\nError: {ex.Message}", "OK");
         }
     }
+
 }

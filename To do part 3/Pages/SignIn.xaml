@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="To_do_part_3.SignIn"
+             BackgroundColor="WhiteSmoke"
              Title="SignIn">
     <VerticalStackLayout Padding="30" Spacing="20">
         <Image
@@ -21,21 +22,21 @@
         </Border>
 
         <Button 
-            Text="SIGN UP"
-            BackgroundColor="#8A2BE2"
-            TextColor="White"
-            HeightRequest="50"
-            CornerRadius="25"
-            Clicked="SignUpClicked"
-            Margin="0,0,0,10"/>
-
-        <Button 
-            Text="SIGN IN"
-            BackgroundColor="#9370DB"
+            Text="Sign In"
+            BackgroundColor="#0F8B8D"
             TextColor="White"
             HeightRequest="50"
             CornerRadius="25"
             Clicked="SignInClicked"
+            Margin="0,0,0,10"/>
+
+        <Button 
+            Text="Sign Up"
+            BackgroundColor="#EC9A29"
+            TextColor="White"
+            HeightRequest="50"
+            CornerRadius="25"
+            Clicked="SignUpClicked"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="Center"/>
     </VerticalStackLayout>

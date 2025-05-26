@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="To_do_part_3.AddToDoPage"
+             BackgroundColor="WhiteSmoke"
              Title="AddToDoPage">
     <VerticalStackLayout>
 
@@ -41,7 +42,7 @@
 
         <VerticalStackLayout Margin="20,10,20,0" Spacing="15">
             <Border
-            BackgroundColor="#C3D44B" 
+            BackgroundColor="#C5D9E2"  
             StrokeShape="RoundRectangle 15"
             Padding="10" 
             >
@@ -53,7 +54,7 @@
                                       PlaceholderColor="Black"
                                       x:Name="Task_title"/>
                     <Border
-                                   BackgroundColor="#A7B834" 
+                                   BackgroundColor="#70f5f5f5"
                                    StrokeShape="RoundRectangle 10"
                                    Padding="10" 
                                    Margin="0,5,0,0"  
@@ -71,7 +72,7 @@
                     </Border>
                 </VerticalStackLayout>
             </Border>
-            <Button Text="Add" BackgroundColor="LightBlue" TextColor="Black" Clicked="Add_Todo_Clicked"/>
+            <Button Text="Add" BackgroundColor="#0F8B8D" TextColor="White" Clicked="Add_Todo_Clicked"/>
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

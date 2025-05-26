@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="To_do_part_3.CompletedToDo"
+             BackgroundColor="WhiteSmoke"
              Title="CompletedToDo">
     <ContentPage.Content>
         <Grid>
@@ -16,10 +17,11 @@
                     VerticalOptions="Center" 
                     HorizontalOptions="Center" 
                     FontSize="Large"
+                    TextColor="Black"
                     FontAttributes="Bold"
                     Margin="0,20,0,5"/>
 
-                <BoxView HeightRequest="1" Color="Gray" Margin="25,10,25,10"/>
+                <BoxView HeightRequest="1" Color="#C5D9E2" Margin="25,10,25,10"/>
             </VerticalStackLayout>
 
             <ListView 
@@ -40,7 +42,7 @@
                                     <ColumnDefinition Width="*"  />
                                 </Grid.ColumnDefinitions>
 
-                                <Border  Grid.Row="0"  Grid.Column="0" BackgroundColor="WhiteSmoke"  Padding="15" Margin="15"  HeightRequest="80" StrokeShape="RoundRectangle 150" Stroke="Transparent">
+                                <Border  Grid.Row="0"  Grid.Column="0" BackgroundColor="#50C5D9E2"  Padding="15" Margin="15"  HeightRequest="80" Stroke="Transparent">
 
                                     <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
                                         <Grid.RowDefinitions>
@@ -52,7 +54,7 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding ItemName}" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black"/>
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding ItemName}" FontSize="Large" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" LineBreakMode="TailTruncation"/>
                                         <ImageButton
                                             Grid.Row="0"
                                             Grid.Column="1"
